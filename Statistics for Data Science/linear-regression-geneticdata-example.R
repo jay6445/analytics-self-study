@@ -50,12 +50,13 @@ R <- sample_n(galton_heights, 25, replace = TRUE) %>%
 R
 sample_n(galton_heights, 25, replace = TRUE)
 
+
 #now we will create a simulation to find the correlation if the sample size was 1000
 #we will use the monte carlo simulation
 
 # Monte Carlo simulation to show distribution of sample correlation for a sample of 1000
 B <- 1000
-N <- 25
+N <- 41
 R <- replicate(B, {
   sample_n(galton_heights, N, replace = TRUE) %>%
     summarize(r = cor(father, son)) %>%
@@ -76,3 +77,22 @@ data.frame(R) %>%
   geom_abline(intercept = mean(R), slope = sqrt((1-mean(R)^2)/(N-2)))
 
 ?replicate
+
+qplot(galton_heights$father , geom='histogram', color=I("black"), bins = 15)
+qplot(galton_heights$son , geom='histogram', color=I("black"))
+
+galton_heights$father1 = (galton_heights$father - min(galton_heights$father))/ max(galton_heights$father)- min(galton_heights$father) 
+qplot(galton_heights$father1 , geom='histogram', color=I("black") , bins = 15)
+qplot(galton_heights$father , geom='histogram', color=I("black"), bins = 15)
+
+mean(galton_heights$father)
+var(galton_heights$father)
+
+summary(mean = mean(galton_heights$father) , var = var(galton_heights$father))
+69.09888 + 6.484943
+max(galton_heights$father)
+range(galton_heights$father)
+std(galton_heights$father)/mean(galton_heights$father)
+sqrt(6.484943)
+
+galton_heights$father
